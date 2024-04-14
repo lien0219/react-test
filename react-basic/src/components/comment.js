@@ -2,9 +2,11 @@ import avatar from "../images/bozai.png";
 import one from "../images/1.jpg";
 import two from "../images/2.jpg";
 import "./scss/comment.scss";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import _ from "lodash";
 import classNames from "classnames";
+import { v4 as uuidV4 } from "uuid";
+import dayjs from "dayjs";
 /**
  * 评论列表的渲染和操作
  *
@@ -91,6 +93,29 @@ const Comment = () => {
       setCommentList(_.orderBy(commentList, "ctime", "desc"));
     }
   };
+
+  // 发表评论
+  const [content, setContent] = useState("");
+  const inputRef = useRef(null);
+
+  const handlePublish = () => {
+    setCommentList([
+      ...commentList,
+      {
+        rpid: uuidV4(), //随机id
+        user: {
+          uid: "36080105",
+          avatar: one,
+          uname: "测试",
+        },
+        content: content,
+        ctime: dayjs(new Date()).format("MM-DD HH:mm"), //月-日   时：分
+        like: 100,
+      },
+    ]);
+    setContent("");
+    inputRef.current.focus();
+  };
   return (
     <div className="app">
       {/* 导航 Tab */}
@@ -135,10 +160,15 @@ const Comment = () => {
             <textarea
               className="reply-box-textarea"
               placeholder="发一条友善的评论"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              ref={inputRef}
             />
             {/* 发布按钮 */}
             <div className="reply-box-send">
-              <div className="send-text">发布</div>
+              <div onClick={handlePublish} className="send-text">
+                发布
+              </div>
             </div>
           </div>
         </div>
