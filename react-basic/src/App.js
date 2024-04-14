@@ -1,6 +1,7 @@
 import Test from "./components/test";
 import StyleTest from "./components/styleTest";
 import Comment from "./components/comment";
+import Form from "./components/form/form";
 
 const count = 100;
 function getName() {
@@ -88,6 +89,8 @@ function App() {
       <StyleTest />
       <h1>评论demo</h1>
       <Comment />
+      <h1>受控和非受控表单</h1>
+      <Form />
     </div>
   );
 }
