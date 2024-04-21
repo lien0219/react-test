@@ -7,6 +7,7 @@ import Parent from "./components/valueTransmission/childrenExplain";
 import Fat from "./components/valueTransmission/fromSonToFather";
 import Zuapp from "./components/valueTransmission/brotherCommunication";
 import FaApp from "./components/valueTransmission/context";
+import UseEffect from "./components/useEffect";
 
 const count = 100;
 function getName() {
@@ -106,6 +107,8 @@ function App() {
           <Zuapp/>
           <h1>context机制跨层传递数据</h1>
           <FaApp/>
+          <h1>useEffect的使用</h1>
+          <UseEffect/>
       </div>
   );
 }
