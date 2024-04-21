@@ -10,6 +10,8 @@ import FaApp from "./components/valueTransmission/context";
 import UseEffect from "./components/useEffect";
 // view
 import HookTest from "./views/hooksuse";
+import CommentNew from "./views/comment";
+import { useState } from "react";
 
 const count = 100;
 function getName() {
@@ -52,8 +54,39 @@ function App() {
     console.log("自定义参数:", name, e);
   };
 
+  // 返回顶部
+  const [top, setTop] = useState(false);
+  window.onscroll = function () {
+    const res = document.documentElement.scrollTop;
+    // console.log(res, "----");
+    if (res > 350) {
+      setTop(true);
+    } else {
+      setTop(false);
+    }
+  };
+  const goTop = () => {
+    document.documentElement.scrollTop = 0;
+  };
+
   return (
     <div className="App">
+      {top && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: "50px",
+            right: "10px",
+            color: "goldenrod",
+            fontSize: "24px",
+          }}
+          className="goTop"
+          onClick={goTop}
+        >
+          返回顶部
+        </div>
+      )}
+
       {count}
       <hr></hr>
       {getName()}
@@ -113,6 +146,8 @@ function App() {
       <UseEffect />
       <h1>自定义hook</h1>
       <HookTest />
+      <h1>评论demo2.0</h1>
+      <CommentNew />
     </div>
   );
 }

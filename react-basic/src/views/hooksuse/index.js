@@ -1,4 +1,4 @@
-import useToggle from "../../hoooks/useToggle";
+import useToggle from "../../hooks/useToggle";
 
 function HookTest() {
   const { value, toggle } = useToggle();
