@@ -11,7 +11,13 @@ import UseEffect from "./components/useEffect";
 // view
 import HookTest from "./views/hooksuse";
 import CommentNew from "./views/comment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+// 使用全局状态管理器
+import { useSelector, useDispatch } from "react-redux";
+// 导入actionCreater
+import { inscrement, decrement, addToNum } from "./store/modules/counterStore";
+import { fetchChannlList } from "./store/modules/channelStore";
 
 const count = 100;
 function getName() {
@@ -40,6 +46,14 @@ function getArticleTem() {
 }
 
 function App() {
+  // 全局状态
+  const { count } = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+  const { channelList } = useSelector((state) => state.channel);
+  useEffect(() => {
+    dispatch(fetchChannlList());
+  }, [dispatch]);
+
   // 点击
   const clickHandle = () => {
     console.log("button按钮点击了");
@@ -148,6 +162,43 @@ function App() {
       <HookTest />
       <h1>评论demo2.0</h1>
       <CommentNew />
+      <h1>全局状态管理器测试</h1>
+      <div className="store">
+        <button
+          style={{ marginRight: "10px" }}
+          onClick={() => dispatch(decrement())}
+          type="button"
+        >
+          -
+        </button>
+        {count}
+        <button
+          style={{ marginLeft: "10px" }}
+          onClick={() => dispatch(inscrement())}
+          type="button"
+        >
+          +
+        </button>
+        <button
+          style={{ marginLeft: "10px" }}
+          onClick={() => dispatch(addToNum(10))}
+          type="button"
+        >
+          +10
+        </button>
+        <button
+          style={{ marginLeft: "10px" }}
+          onClick={() => dispatch(addToNum(20))}
+          type="button"
+        >
+          +20
+        </button>
+        <ul>
+          {channelList.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
