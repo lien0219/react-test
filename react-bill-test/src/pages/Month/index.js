@@ -1,7 +1,7 @@
 import { NavBar, DatePicker } from "antd-mobile";
 import "./index.scss";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
 import dayjs from "dayjs";
 import { useSelector } from "react-redux";
@@ -41,12 +41,26 @@ const Month = () => {
       total: pay + income,
     };
   }, [currentMonthList]);
+
+  // 初始化显示当月统计数据
+  useEffect(() => {
+    const nowDate = dayjs().format("YYYY-MM");
+    // 边界控制
+    if (monthGroup[nowDate]) {
+      setCurrentMonthList(monthGroup[nowDate]);
+    }
+  }, [monthGroup]);
+
   const onConfirm = (date) => {
     setDateVisible(false);
+
     const formatDate = dayjs(date).format("YYYY-MM");
     // console.log(formatDate);
+    // 边界控制
+    if (monthGroup[formatDate]) {
+      setCurrentMonthList(monthGroup[formatDate]);
+    }
 
-    setCurrentMonthList(monthGroup[formatDate] ?? []);
     setCurrentDate(formatDate);
   };
 
