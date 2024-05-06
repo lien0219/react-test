@@ -39,32 +39,46 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## 路径解析配置
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1.安装craco插件
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+npm i -D@craco/craco
 
-### Code Splitting
+2.根目录下创建配置文件
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+craco.config.js
 
-### Analyzing the Bundle Size
+3.配置文件中添加路径解析配置
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+const path = require("path");
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+*module*.*exports* = {
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+ webpack: {
 
-### Deployment
+  alias: {
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+   "@": path.resolve(__dirname, "src"),
 
-### `npm run build` fails to minify
+  },
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ },
+
+};
+
+4.包文件中配置启动和打包命令
+
+ "scripts": {
+
+  "start": "craco start",
+
+  "build": "craco build",
+
+  "test": "react-scripts test",
+
+  "eject": "react-scripts eject"
+
+ },
