@@ -102,3 +102,21 @@ const path = require("path");
  }
 
 }
+
+## json-server实现数据Mock
+
+1.安装json-server
+
+npm i -D json-server
+
+2.准备json文件
+
+![image-20240506182322498](C:\Users\李恩\AppData\Roaming\Typora\typora-user-images\image-20240506182322498.png)
+
+3.添加启动命令
+
+![image-20240506182446467](C:\Users\李恩\AppData\Roaming\Typora\typora-user-images\image-20240506182446467.png)
+
+4.访问接口测试
+
+ http://localhost:8080/ka
