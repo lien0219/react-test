@@ -82,3 +82,23 @@ const path = require("path");
   "eject": "react-scripts eject"
 
  },
+
+## 联想路径配置
+
+根目录添加jsconfig.json文件
+
+{
+
+ "compilerOptions": {
+
+  "baseUrl": "./",
+
+  "paths": {
+
+   "@/*": ["src/*"]
+
+  }
+
+ }
+
+}
