@@ -13,11 +13,6 @@ import "./theme.css";
 import { Provider } from "react-redux";
 import store from "./store";
 
-import Sum from "@/test";
-
-const tot = Sum(1, 2);
-console.log(tot);
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
