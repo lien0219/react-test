@@ -97,6 +97,20 @@
       "date": "2023-02-28T16:00:00.000Z",
       "useFor": "salary",
       "id": 21
+    },
+    {
+      "type": "pay",
+      "money": -100,
+      "date": "2024-05-18T07:35:38.590Z",
+      "useFor": "drinks",
+      "id": 22
+    },
+    {
+      "type": "income",
+      "money": 200,
+      "date": "2024-04-13T16:00:00.000Z",
+      "useFor": "overtimepay",
+      "id": 23
     }
   ]
 }
