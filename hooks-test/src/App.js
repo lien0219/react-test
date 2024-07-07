@@ -1,4 +1,4 @@
-import { memo, useMemo, useReducer, useState } from "react";
+import { memo, useCallback, useMemo, useReducer, useState } from "react";
 
 // 1.useReducer
 function reducer(state, action) {
@@ -14,7 +14,7 @@ function reducer(state, action) {
   }
 }
 
-// 2.useMemo
+// 2.useMemo  缓存值
 //斐波那契数列之和
 function fib(n) {
   // console.log("计算函数执行了");
@@ -32,8 +32,14 @@ const MemoSon = memo(function Son() {
 
 // 4.React.memo  props比较机制(传递一个简单的prop,prop变化时组件重新渲染；传递引用类型的prop,比较的是最新值和旧值的引用是否相等)
 const MemoSon2 = memo(function Son({ list }) {
-  console.log("子组件重新渲染");
+  // console.log("子组件重新渲染");
   return <div>this is Son2----------{list}</div>;
+});
+
+// 5.useCallback   缓存函数
+const Input = memo(function Input({ onChange }) {
+  console.log("子组件重新渲染");
+  return <input type="text" onChange={(e) => onChange(e.target.value)} />;
 });
 
 function App() {
@@ -59,6 +65,10 @@ function App() {
   const list = useMemo(() => {
     return [1, 2, 3];
   }, []);
+
+  //  5.useCallback  缓存函数
+  const changeHandler = useCallback((value) => console.log(value), []);
+  const [count5, setCount5] = useState(0);
 
   return (
     <div className="App">
@@ -86,6 +96,11 @@ function App() {
       <MemoSon2 list={list}></MemoSon2>
       <button onClick={() => setCount4(count4 + 1)}>
         change count4:{count4}
+      </button>
+      <h3> 5.useCallback</h3>
+      <Input onChange={changeHandler} />
+      <button onClick={() => setCount5(count5 + 1)}>
+        change count5:{count5}
       </button>
     </div>
   );
