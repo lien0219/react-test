@@ -26,8 +26,14 @@ function fib(n) {
 
 // 3.React.memo(默认的渲染机制是子跟着父一起渲染),memo进行缓存，只有props发生变化的时候才会重新渲染，详细介绍访问个人主页csdn链接react专栏
 const MemoSon = memo(function Son() {
-  console.log("子组件重新渲染");
+  // console.log("子组件重新渲染");
   return <div>this is Son</div>;
+});
+
+// 4.React.memo  props比较机制(传递一个简单的prop,prop变化时组件重新渲染；传递引用类型的prop,比较的是最新值和旧值的引用是否相等)
+const MemoSon2 = memo(function Son({ list }) {
+  console.log("子组件重新渲染");
+  return <div>this is Son2----------{list}</div>;
 });
 
 function App() {
@@ -45,6 +51,14 @@ function App() {
 
   // 3.React.memo
   const [count3, setCount3] = useState(0);
+
+  // 4.React.memo  props比较机制
+  const [count4, setCount4] = useState(0);
+  // const num = 500;
+  // const list = [1, 2, 3];
+  const list = useMemo(() => {
+    return [1, 2, 3];
+  }, []);
 
   return (
     <div className="App">
@@ -68,6 +82,11 @@ function App() {
         change count3:{count3}
       </button>
       <MemoSon></MemoSon>
+      <h3>4.React.memo props比较机制</h3>
+      <MemoSon2 list={list}></MemoSon2>
+      <button onClick={() => setCount4(count4 + 1)}>
+        change count4:{count4}
+      </button>
     </div>
   );
 }
