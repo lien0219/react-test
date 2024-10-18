@@ -7,6 +7,7 @@ import {
   useState,
   useRef,
   useImperativeHandle,
+  Component,
 } from "react";
 
 // 1.useReducer
@@ -74,6 +75,24 @@ const SonUseImperativeHandle = forwardRef((props, ref) => {
   });
   return <input type="text" ref={inputRef} />;
 });
+
+// 8.类组件温习
+class Counter extends Component {
+  state = {
+    count: 0,
+  };
+
+  setCount = () => {
+    //修改状态数据
+    this.setState({
+      count: this.state.count + 1,
+    });
+  };
+
+  render() {
+    return <button onClick={this.setCount}>{this.state.count}</button>;
+  }
+}
 
 function App() {
   // 1.useReducer
@@ -155,6 +174,8 @@ function App() {
       <h3>7.useImperativeHandle---暴露子组件方法</h3>
       <SonUseImperativeHandle ref={sonRef1} />
       <button onClick={showRef1}>focus</button>
+      <h3>8.类组件温习</h3>
+      <Counter />
     </div>
   );
 }
