@@ -6,6 +6,7 @@ import {
   useReducer,
   useState,
   useRef,
+  useImperativeHandle,
 } from "react";
 
 // 1.useReducer
@@ -58,6 +59,22 @@ const SonForwardRef = forwardRef((props, ref) => {
   return <input type="text" ref={ref} />;
 });
 
+// 7.useImperativeHandle   暴露子组件方法
+const SonUseImperativeHandle = forwardRef((props, ref) => {
+  const inputRef = useRef(null);
+  const focusHandle = () => {
+    inputRef.current.focus();
+  };
+  //暴露focusHandle方法
+  useImperativeHandle(ref, () => {
+    return {
+      //暴露方法
+      focusHandle,
+    };
+  });
+  return <input type="text" ref={inputRef} />;
+});
+
 function App() {
   // 1.useReducer
   const [state, dispatch] = useReducer(reducer, 0);
@@ -91,6 +108,13 @@ function App() {
   const showRef = () => {
     console.log(sonRef);
     sonRef.current.focus();
+  };
+
+  // 7.useImperativeHandle
+  const sonRef1 = useRef(null);
+  const showRef1 = () => {
+    console.log(sonRef1.current);
+    sonRef1.current.focusHandle();
   };
 
   return (
@@ -128,6 +152,9 @@ function App() {
       <h3>6.forwardRef</h3>
       <SonForwardRef ref={sonRef} />
       <button onClick={showRef}>focus</button>
+      <h3>7.useImperativeHandle---暴露子组件方法</h3>
+      <SonUseImperativeHandle ref={sonRef1} />
+      <button onClick={showRef1}>focus</button>
     </div>
   );
 }
