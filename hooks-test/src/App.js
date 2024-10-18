@@ -1,4 +1,12 @@
-import { memo, useCallback, useMemo, useReducer, useState } from "react";
+import {
+  forwardRef,
+  memo,
+  useCallback,
+  useMemo,
+  useReducer,
+  useState,
+  useRef,
+} from "react";
 
 // 1.useReducer
 function reducer(state, action) {
@@ -42,6 +50,14 @@ const Input = memo(function Input({ onChange }) {
   return <input type="text" onChange={(e) => onChange(e.target.value)} />;
 });
 
+// 6.forwardRef
+// const SonForwardRef = () => {
+//   return <input type="text" />;
+// };
+const SonForwardRef = forwardRef((props, ref) => {
+  return <input type="text" ref={ref} />;
+});
+
 function App() {
   // 1.useReducer
   const [state, dispatch] = useReducer(reducer, 0);
@@ -69,6 +85,13 @@ function App() {
   //  5.useCallback  缓存函数
   const changeHandler = useCallback((value) => console.log(value), []);
   const [count5, setCount5] = useState(0);
+
+  // 6.forwardRef
+  const sonRef = useRef(null);
+  const showRef = () => {
+    console.log(sonRef);
+    sonRef.current.focus();
+  };
 
   return (
     <div className="App">
@@ -102,6 +125,9 @@ function App() {
       <button onClick={() => setCount5(count5 + 1)}>
         change count5:{count5}
       </button>
+      <h3>6.forwardRef</h3>
+      <SonForwardRef ref={sonRef} />
+      <button onClick={showRef}>focus</button>
     </div>
   );
 }
