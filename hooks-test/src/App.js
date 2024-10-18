@@ -94,6 +94,26 @@ class Counter extends Component {
   }
 }
 
+// 9.类组件的生命周期
+class SonClass extends Component {
+  //组件渲染完毕执行一次
+  componentDidMount() {
+    console.log("组件渲染完毕，发送请求");
+    this.timer = setInterval(() => {
+      console.log("定时器运行中");
+    }, 1000);
+  }
+  //组件卸载自动执行  副作用清理工作  清楚定时器  清除事件绑定
+  componentWillUnmount() {
+    console.log("SonClass组件被卸载");
+    clearInterval(this.timer);
+  }
+
+  render() {
+    return <div>SonClass</div>;
+  }
+}
+
 function App() {
   // 1.useReducer
   const [state, dispatch] = useReducer(reducer, 0);
@@ -136,6 +156,9 @@ function App() {
     sonRef1.current.focusHandle();
   };
 
+  // 9.类组件的生命周期
+  const [show, setShow] = useState(true);
+
   return (
     <div className="App">
       <h3>1.useReducer</h3>
@@ -176,6 +199,9 @@ function App() {
       <button onClick={showRef1}>focus</button>
       <h3>8.类组件温习</h3>
       <Counter />
+      <h3>9.类组件的生命周期</h3>
+      {show && <SonClass />}
+      <button onClick={() => setShow(false)}>unmount</button>
     </div>
   );
 }
