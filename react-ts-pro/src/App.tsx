@@ -22,12 +22,15 @@ function App() {
   //   name: "李四",
   //   age: 18,
   // });
-  const [user, setUser] = useState<User>(() => {
-    return {
-      name: "李四",
-      age: 18,
-    };
-  });
+
+  // const [user, setUser] = useState<User>(() => {
+  //   return {
+  //     name: "李四",
+  //     age: 18,
+  //   };
+  // });
+
+  const [user, setUser] = useState<User | null>(null);
 
   const changeUser = () => {
     setUser({
@@ -38,7 +41,7 @@ function App() {
 
   return (
     <>
-      app{user.name}-{user.age}
+      app{user?.name}-{user?.age}
       <button onClick={changeUser}>改变user</button>
     </>
   );
