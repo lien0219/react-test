@@ -1,5 +1,18 @@
 import { useState } from "react";
 
+// type Props = {
+//   className: string;
+// };
+interface Props {
+  className: string;
+  title?: string;
+}
+
+function Button(props: Props) {
+  const { className } = props;
+  return <button className={className}>click me</button>;
+}
+
 type User = {
   name: string;
   age: number;
@@ -43,6 +56,7 @@ function App() {
     <>
       app{user?.name}-{user?.age}
       <button onClick={changeUser}>改变user</button>
+      <Button className="test" title="this is button" />
     </>
   );
 }
