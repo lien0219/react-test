@@ -13,6 +13,17 @@ function Button(props: Props) {
   return <button className={className}>click me</button>;
 }
 
+//props和ts下的特殊的children类型
+type Props1 = {
+  className: string;
+  children: React.ReactNode;
+};
+
+function Button1(props1: Props1) {
+  const { className, children } = props1;
+  return <button className={className}>{children}</button>;
+}
+
 type User = {
   name: string;
   age: number;
@@ -57,6 +68,9 @@ function App() {
       app{user?.name}-{user?.age}
       <button onClick={changeUser}>改变user</button>
       <Button className="test" title="this is button" />
+      <Button1 className="test">
+        <span>this is span</span>
+      </Button1>
     </>
   );
 }
