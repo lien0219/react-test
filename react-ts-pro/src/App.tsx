@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 // type Props = {
 //   className: string;
@@ -79,6 +79,19 @@ function App() {
     console.log(msg);
   };
 
+  // useRef与ts-获取dom
+  const domRef = useRef<HTMLInputElement>(null);
+  // const timerId = useRef<null | undefined>(undefined);
+  useEffect(() => {
+    domRef.current?.focus();
+
+    // timerId.current = setInterval(() => {
+    //   console.log("123");
+    // }, 1000);
+
+    // return () => clearInterval(timerId.current);
+  }, []);
+
   return (
     <>
       app{user?.name}-{user?.age}
@@ -89,6 +102,7 @@ function App() {
       </Button1>
       <Son onGetMsg={(msg) => console.log(msg)} />
       <Son onGetMsg={getMsgHandler} />
+      <input ref={domRef} />
     </>
   );
 }
