@@ -24,6 +24,18 @@ function Button1(props1: Props1) {
   return <button className={className}>{children}</button>;
 }
 
+//props和ts为事件prop添加类型
+type Props2 = {
+  onGetMsg?: (msg: string) => void;
+};
+function Son(props2: Props2) {
+  const { onGetMsg } = props2;
+  const clickHandler = () => {
+    onGetMsg?.("this is msg");
+  };
+  return <button onClick={clickHandler}>sendMsg</button>;
+}
+
 type User = {
   name: string;
   age: number;
@@ -63,6 +75,10 @@ function App() {
     });
   };
 
+  const getMsgHandler = (msg: string) => {
+    console.log(msg);
+  };
+
   return (
     <>
       app{user?.name}-{user?.age}
@@ -71,6 +87,8 @@ function App() {
       <Button1 className="test">
         <span>this is span</span>
       </Button1>
+      <Son onGetMsg={(msg) => console.log(msg)} />
+      <Son onGetMsg={getMsgHandler} />
     </>
   );
 }
