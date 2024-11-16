@@ -2,7 +2,7 @@ import { http } from "@/utils";
 import type { ResType } from "./shared";
 
 //接口类型
-type ChannelItem = {
+export type ChannelItem = {
   id: number;
   name: string;
 };
